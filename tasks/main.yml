@@ -1,2 +1,4 @@
 ---
 # tasks file for container-chronograf
+- import_tasks: chronograf.yml
+  become: true
