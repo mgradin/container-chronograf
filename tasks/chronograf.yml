@@ -1,0 +1,24 @@
+---
+- name: Create chronograf data directory
+  file: 
+    path: "{{ VAR_CHRONOGRAF_DIR }}"
+    recurse: yes
+    state: directory
+
+- name: Start chronograf container
+  docker_container:
+    name: chronograf
+    image: chronograf:latest
+    pull: yes
+    state: started
+    labels:
+      traefik.backend=chronograf
+      "traefik.frontend.rule=Host:{{ VAR_CHRONOGRAF_URL }}"
+      traefik.port=8888
+      traefik.enable=true
+    volumes:
+    - "{{ VAR_CHRONOGRAF_DIR }}:/var/lib/chronograf:z"
+    links:
+    - influxdb
+    restart_policy: unless-stopped
+

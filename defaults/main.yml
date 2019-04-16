@@ -1,0 +1,4 @@
+---
+# defaults file for container-chronograf
+VAR_CHRONOGRAF_DIR: /opt/chronograf
+VAR_CHRONOGRAF_URL: chronograf.example.com
